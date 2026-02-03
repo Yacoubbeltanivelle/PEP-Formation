@@ -1,34 +1,26 @@
-import { type Locale, getDictionary, locales } from "@/lib/i18n";
-import { formations, type Theme, type Audience } from "@/lib/data/formations";
-import { notFound } from "next/navigation";
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { type Locale, getDictionary } from "@/lib/i18n";
+import { formations, type Theme } from "@/lib/data/formations";
 import Container from "@/components/Container";
 import SectionTitle from "@/components/SectionTitle";
 import FormationCard from "@/components/FormationCard";
 import FiltersBar from "@/components/FiltersBar";
 import Link from "next/link";
 
-interface CataloguePageProps {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<{
-    theme?: string;
-    audience?: string;
-    maxHours?: string;
-  }>;
+interface CatalogueClientProps {
+  locale: Locale;
 }
 
-export default async function CataloguePage({
-  params,
-  searchParams,
-}: CataloguePageProps) {
-  const { locale: localeParam } = await params;
-  const filters = await searchParams;
-
-  if (!locales.includes(localeParam as Locale)) {
-    notFound();
-  }
-
-  const locale = localeParam as Locale;
+export default function CatalogueClient({ locale }: CatalogueClientProps) {
   const dict = getDictionary(locale);
+  const searchParams = useSearchParams();
+
+  // Get filter values from URL
+  const themeFilter = searchParams.get("theme");
+  const audienceFilter = searchParams.get("audience");
+  const maxHoursFilter = searchParams.get("maxHours");
 
   // Get unique themes from formations
   const themes = [...new Set(formations.map((f) => f.theme))] as Theme[];
@@ -36,20 +28,20 @@ export default async function CataloguePage({
   // Filter formations
   let filteredFormations = [...formations];
 
-  if (filters.theme) {
+  if (themeFilter) {
     filteredFormations = filteredFormations.filter(
-      (f) => f.theme === filters.theme,
+      (f) => f.theme === themeFilter,
     );
   }
 
-  if (filters.audience) {
+  if (audienceFilter) {
     filteredFormations = filteredFormations.filter(
-      (f) => f.audience === filters.audience || f.audience === "both",
+      (f) => f.audience === audienceFilter || f.audience === "both",
     );
   }
 
-  if (filters.maxHours) {
-    const maxHours = parseInt(filters.maxHours, 10);
+  if (maxHoursFilter) {
+    const maxHours = parseInt(maxHoursFilter, 10);
     filteredFormations = filteredFormations.filter(
       (f) => f.durationHours <= maxHours,
     );
@@ -67,9 +59,9 @@ export default async function CataloguePage({
           locale={locale}
           dict={dict}
           themes={themes}
-          currentTheme={filters.theme}
-          currentAudience={filters.audience}
-          currentMaxHours={filters.maxHours}
+          currentTheme={themeFilter || undefined}
+          currentAudience={audienceFilter || undefined}
+          currentMaxHours={maxHoursFilter || undefined}
         />
 
         {filteredFormations.length > 0 ? (
