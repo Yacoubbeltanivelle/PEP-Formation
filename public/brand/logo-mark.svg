@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Monogram Pulse - Mark Only -->
+  <path 
+    d="M4 32 L12 32 L18 12 L26 42 L32 24 L44 24" 
+    stroke="#EC520B" 
+    stroke-width="4" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+    fill="none"
+  />
+</svg>

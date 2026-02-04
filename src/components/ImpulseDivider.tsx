@@ -1,23 +1,23 @@
 interface ImpulseDividerProps {
   className?: string;
-  variant?: "accent" | "turquoise" | "violet";
+  variant?: "full" | "short" | "micro";
 }
 
 export default function ImpulseDivider({
   className = "",
-  variant = "accent",
+  variant = "short",
 }: ImpulseDividerProps) {
-  const colors = {
-    accent: "from-accent via-accent/50 to-transparent",
-    turquoise: "from-turquoise via-turquoise/50 to-transparent",
-    violet: "from-violet via-violet/50 to-transparent",
+  const widthClasses = {
+    full: "w-full",
+    short: "w-24",
+    micro: "w-6",
   };
 
   return (
-    <div className={`flex items-center justify-center py-8 ${className}`}>
-      <div
-        className={`h-1 w-24 rounded-full bg-gradient-to-r ${colors[variant]}`}
-      />
-    </div>
+    <div
+      className={`${widthClasses[variant]} h-0.5 bg-gradient-to-r from-pep-orange via-pep-mint to-pep-violet rounded-full ${className}`}
+      role="separator"
+      aria-hidden="true"
+    />
   );
 }

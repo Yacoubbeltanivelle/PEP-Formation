@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { type Locale, type Dictionary, locales } from "@/lib/i18n";
 
 interface HeaderProps {
@@ -28,28 +29,45 @@ export default function Header({ locale, dict }: HeaderProps) {
   const otherLocale = locales.find((l) => l !== locale) as Locale;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-ink/10">
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-graphite/5">
       <nav className="container-main flex items-center justify-between h-16">
-        {/* Logo */}
+        {/* Logo - Full on desktop, Mark on mobile */}
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2 font-bold text-xl text-ink hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-sm"
+          className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pep-mint focus-visible:ring-offset-2 rounded"
+          aria-label="PEP Formations - Accueil"
         >
-          <span className="text-accent">Pep</span>
-          <span>Formations</span>
+          {/* Mobile: Logo mark only */}
+          <Image
+            src="/brand/logo-mark.svg"
+            alt="PEP Formations"
+            width={36}
+            height={36}
+            priority
+            className="md:hidden"
+          />
+          {/* Desktop: Full logo */}
+          <Image
+            src="/brand/logo-full.svg"
+            alt="PEP Formations"
+            width={140}
+            height={42}
+            priority
+            className="hidden md:block"
+          />
         </Link>
 
         {/* Navigation */}
-        <div className="flex items-center gap-6">
-          <ul className="hidden md:flex items-center gap-6">
+        <div className="flex items-center gap-4 md:gap-6">
+          <ul className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-sm px-2 py-1 ${
+                  className={`text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-pep-mint focus-visible:ring-offset-2 rounded px-3 py-2 ${
                     pathname === item.href
-                      ? "text-accent"
-                      : "text-ink-light hover:text-ink"
+                      ? "text-pep-orange"
+                      : "text-graphite/70 hover:text-graphite"
                   }`}
                 >
                   {item.label}
@@ -61,7 +79,7 @@ export default function Header({ locale, dict }: HeaderProps) {
           {/* Language Switch */}
           <Link
             href={getPathWithNewLocale(otherLocale)}
-            className="text-sm font-medium px-3 py-1.5 rounded-full border border-ink/20 hover:border-accent hover:text-accent transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            className="text-sm font-medium px-3 py-1.5 rounded-full border border-graphite/10 hover:border-pep-orange hover:text-pep-orange transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-pep-mint focus-visible:ring-offset-2"
             aria-label={`Switch to ${otherLocale === "en" ? "English" : "Français"}`}
           >
             {dict.nav.langSwitch}

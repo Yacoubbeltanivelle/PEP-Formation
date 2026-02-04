@@ -27,11 +27,16 @@ export default async function CataloguePage({ params }: CataloguePageProps) {
   const formations = getFormations(locale);
 
   return (
-    <section className="section">
+    <section className="section bg-offwhite/50">
       <Container>
         <SectionTitle
           title={dict.catalog.title}
-          subtitle={dict.catalog.subtitle}
+          subtitle={
+            locale === "fr"
+              ? "Des formations opérationnelles, pensées pour le terrain. Intra / inter — sur demande."
+              : "Hands-on training designed for the field. In-house / open sessions — on request."
+          }
+          showDivider
         />
 
         {/* Client-side filtering with SSR data */}

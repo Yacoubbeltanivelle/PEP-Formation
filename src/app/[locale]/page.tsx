@@ -27,13 +27,13 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <>
       {/* Hero Section */}
-      <section className="section bg-surface">
+      <section className="section bg-offwhite">
         <Container>
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-ink mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-graphite mb-6 leading-tight tracking-tight">
               {dict.home.heroTitle}
             </h1>
-            <p className="text-xl md:text-2xl text-ink-light mb-8 max-w-2xl">
+            <p className="text-xl md:text-2xl text-graphite-lighter mb-8 max-w-2xl leading-relaxed">
               {dict.home.heroSubtitle}
             </p>
             <div className="flex flex-wrap gap-4">
@@ -48,7 +48,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </Container>
       </section>
 
-      <ImpulseDivider />
+      <ImpulseDivider variant="full" className="my-0" />
 
       {/* Featured Formations */}
       <section className="section">
@@ -97,7 +97,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </Container>
       </section>
 
-      <ImpulseDivider variant="turquoise" />
+      <ImpulseDivider variant="full" className="my-0" />
 
       {/* Final CTA */}
       <section className="section">
