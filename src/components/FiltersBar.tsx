@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { type Dictionary, type Locale } from "@/lib/i18n";
-import { type Theme, type Audience } from "@/lib/data/formations";
+import { type Theme } from "@/lib/data/formations";
 
 interface FiltersBarProps {
   locale: Locale;

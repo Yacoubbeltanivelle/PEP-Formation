@@ -2,11 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { type Locale, getDictionary } from "@/lib/i18n";
-import {
-  sessions,
-  getSessionsByDate,
-  getSessionDates,
-} from "@/lib/data/sessions";
+import { getSessionsByDate, getSessionDates } from "@/lib/data/sessions";
 import { getFormationBySlug } from "@/lib/data/formations";
 import { formatDate } from "@/lib/utils";
 import Container from "@/components/Container";
