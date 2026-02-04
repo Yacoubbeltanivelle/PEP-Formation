@@ -35,8 +35,8 @@ describe("FormationCard", () => {
 
   it("affiche le badge du thème", () => {
     render(<FormationCard formation={mockFormation} locale="fr" />);
-    // Le composant affiche le thème capitalisé
-    expect(screen.getByText("Safety")).toBeInTheDocument();
+    // Le composant utilise la traduction FR pour le thème
+    expect(screen.getByText("Sécurité")).toBeInTheDocument();
   });
 
   it("contient un lien vers la page de détail", () => {

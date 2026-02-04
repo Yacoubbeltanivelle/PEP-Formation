@@ -1,15 +1,16 @@
+import { COMPANY } from "@/config/company";
+
 export const locales = ["fr", "en"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "fr";
 
-// Dictionaries - FR complet, EN stub
+// Dictionaries - FR complet, EN complet
 const dictionaries = {
   fr: {
     // Common
     common: {
-      siteName: "Pep Formations",
-      siteDescription:
-        "Centre de formation professionnelle - Logistique, Sécurité, Manutention",
+      siteName: COMPANY.brandName,
+      siteDescription: COMPANY.tagline,
       backToHome: "Retour à l'accueil",
       learnMore: "En savoir plus",
       requestQuote: "Demander un devis",
@@ -30,12 +31,15 @@ const dictionaries = {
     },
     // Footer
     footer: {
-      address: "123 Rue de la Formation, 75001 Paris",
-      phone: "+33 1 23 45 67 89",
-      email: "contact@pep-formations.fr",
-      siret: "SIRET : 123 456 789 00012",
+      address: COMPANY.address.oneLine,
+      phone: COMPANY.contact.phoneDisplay,
+      phoneE164: COMPANY.contact.phoneE164,
+      email: COMPANY.contact.email,
+      siret: `SIRET : ${COMPANY.legal.siret}`,
       legalNotice: "Mentions légales",
-      copyright: "© 2026 Pep Formations. Tous droits réservés.",
+      privacy: "Confidentialité",
+      cookies: "Cookies",
+      copyright: `© ${new Date().getFullYear()} ${COMPANY.brandName}. Tous droits réservés.`,
       disclaimer:
         "Les informations présentées sont indicatives et peuvent varier selon le contexte.",
     },
@@ -111,11 +115,11 @@ const dictionaries = {
       messageLabel: "Votre message",
       messagePlaceholder: "Décrivez votre besoin...",
       consentLabel:
-        "J'accepte que mes données soient utilisées pour traiter ma demande.",
+        "J'accepte que mes données soient utilisées pour traiter ma demande conformément à notre politique de confidentialité.",
       submitButton: "Envoyer",
       successTitle: "Merci !",
       successMessage:
-        "Votre demande a bien été envoyée (prototype). Nous vous recontacterons dans les plus brefs délais.",
+        "Votre demande a bien été envoyée. Nous vous recontacterons dans les plus brefs délais.",
       errors: {
         nameRequired: "Le nom est requis",
         emailRequired: "L'email est requis",
@@ -134,13 +138,26 @@ const dictionaries = {
       fire: "Incendie",
       handling: "Manutention",
     },
+    // Legal pages
+    legal: {
+      mentionsTitle: "Mentions légales",
+      privacyTitle: "Politique de confidentialité",
+      cookiesTitle: "Politique des cookies",
+      commercialName: "Nom commercial",
+      addressLabel: "Adresse",
+      emailLabel: "Email",
+      phoneLabel: "Téléphone",
+      siretLabel: "SIRET",
+      v0Note:
+        "Document informatif (V0). À valider / compléter selon statut exact.",
+    },
   },
   en: {
-    // EN stub - minimal translations
+    // EN complete translations
     common: {
-      siteName: "Pep Formations",
+      siteName: COMPANY.brandName,
       siteDescription:
-        "Professional Training Center - Logistics, Safety, Handling",
+        "Professional Training Center — Logistics, Safety, Handling",
       backToHome: "Back to home",
       learnMore: "Learn more",
       requestQuote: "Request a quote",
@@ -159,12 +176,15 @@ const dictionaries = {
       langSwitch: "FR",
     },
     footer: {
-      address: "123 Rue de la Formation, 75001 Paris",
-      phone: "+33 1 23 45 67 89",
-      email: "contact@pep-formations.fr",
-      siret: "SIRET: 123 456 789 00012",
+      address: COMPANY.address.oneLine,
+      phone: COMPANY.contact.phoneDisplay,
+      phoneE164: COMPANY.contact.phoneE164,
+      email: COMPANY.contact.email,
+      siret: `SIRET: ${COMPANY.legal.siret}`,
       legalNotice: "Legal notice",
-      copyright: "© 2026 Pep Formations. All rights reserved.",
+      privacy: "Privacy",
+      cookies: "Cookies",
+      copyright: `© ${new Date().getFullYear()} ${COMPANY.brandName}. All rights reserved.`,
       disclaimer:
         "Information provided is indicative and may vary depending on context.",
     },
@@ -179,7 +199,7 @@ const dictionaries = {
       logisticsTitle: "Logistics, our priority",
       logisticsText:
         "We support companies and individuals in developing their professional skills.",
-      finalCta: "Need a custom training?",
+      finalCta: "Need custom training?",
       finalCtaNote:
         "Dates and prices are indicative and will be confirmed upon request.",
     },
@@ -234,11 +254,12 @@ const dictionaries = {
       companyLabel: "Company",
       messageLabel: "Your message",
       messagePlaceholder: "Describe your needs...",
-      consentLabel: "I agree that my data will be used to process my request.",
+      consentLabel:
+        "I agree that my data will be used to process my request in accordance with our privacy policy.",
       submitButton: "Send",
       successTitle: "Thank you!",
       successMessage:
-        "Your request has been sent (prototype). We will contact you shortly.",
+        "Your request has been sent. We will contact you shortly.",
       errors: {
         nameRequired: "Name is required",
         emailRequired: "Email is required",
@@ -255,6 +276,18 @@ const dictionaries = {
       electrical: "Electrical",
       fire: "Fire",
       handling: "Handling",
+    },
+    legal: {
+      mentionsTitle: "Legal Notice",
+      privacyTitle: "Privacy Policy",
+      cookiesTitle: "Cookie Policy",
+      commercialName: "Commercial name",
+      addressLabel: "Address",
+      emailLabel: "Email",
+      phoneLabel: "Phone",
+      siretLabel: "SIRET",
+      v0Note:
+        "Informational document (V0). To be validated/completed as needed.",
     },
   },
 } as const;

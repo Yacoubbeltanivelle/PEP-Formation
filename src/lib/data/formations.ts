@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/i18n";
+
 export type Theme = "safety" | "logistics" | "electrical" | "fire" | "handling";
 export type Audience = "B2B" | "B2C" | "both";
 
@@ -15,7 +17,8 @@ export interface Formation {
   certificationNote: string;
 }
 
-export const formations: Formation[] = [
+// Formations data - FR only (primary language)
+const formationsFR: Formation[] = [
   {
     slug: "sst-sauveteur-secouriste",
     title: "SST — Sauveteur Secouriste du Travail",
@@ -189,16 +192,208 @@ export const formations: Formation[] = [
   },
 ];
 
-export function getFormationBySlug(slug: string): Formation | undefined {
-  return formations.find((f) => f.slug === slug);
+// EN translations
+const formationsEN: Formation[] = [
+  {
+    slug: "sst-sauveteur-secouriste",
+    title: "SST — Occupational First Aid",
+    shortDescription:
+      "Initial first aid training to respond to accidents and contribute to risk prevention.",
+    theme: "safety",
+    audience: "both",
+    durationHours: 14,
+    objectives: [
+      "Master first aid techniques",
+      "Know how to alert emergency services appropriately",
+      "Contribute to occupational risk prevention",
+    ],
+    prerequisites: [
+      "No specific prerequisites",
+      "Physical ability to perform first aid gestures",
+    ],
+    modalities: [
+      "In-person training",
+      "2 consecutive days (14 hours)",
+      "Groups of 4 to 10 participants",
+      "Practical exercises on mannequins and simulations",
+    ],
+    deliverables: [
+      "SST Certificate (indicative validity: 24 months, to be confirmed per INRS standards)",
+      "Training booklet",
+    ],
+    certificationNote:
+      "Certification issued subject to passing evaluations, according to current standards.",
+  },
+  {
+    slug: "habilitation-electrique",
+    title: "Electrical Authorization — B0/H0/H0V",
+    shortDescription:
+      "Training on electrical risk prevention for non-electrical personnel.",
+    theme: "electrical",
+    audience: "B2B",
+    durationHours: 7,
+    objectives: [
+      "Identify electrical current hazards",
+      "Know electrical safety requirements",
+      "Apply safety instructions when working near electrical installations",
+    ],
+    prerequisites: [
+      "No technical electrical knowledge required",
+      "Proficiency in French (oral and written)",
+    ],
+    modalities: [
+      "In-person training",
+      "1 day (7 hours)",
+      "Theoretical and practical exercises",
+    ],
+    deliverables: [
+      "Post-training assessment (authorization is issued by the employer)",
+      "Training certificate",
+    ],
+    certificationNote:
+      "Authorization is issued by the employer based on post-training assessment.",
+  },
+  {
+    slug: "caces-r489-chariot",
+    title: "CACES® R489 — Forklift Operation",
+    shortDescription:
+      "Training and certification for forklift operation (categories 1A, 3, 5).",
+    theme: "handling",
+    audience: "both",
+    durationHours: 21,
+    objectives: [
+      "Operate a forklift safely",
+      "Perform routine checks and maintenance",
+      "Master traffic and loading rules",
+    ],
+    prerequisites: [
+      "Minimum 18 years old",
+      "Medical fitness for equipment operation",
+      "Basic reading and calculation skills",
+    ],
+    modalities: [
+      "In-person training",
+      "3 days (21 hours, indicative duration by category)",
+      "On-site practice with various forklift types",
+    ],
+    deliverables: [
+      "CACES® Certificate (indicative validity: 5 years, to be confirmed by category)",
+      "Skills attestation",
+    ],
+    certificationNote:
+      "Certification issued by a certified testing organization, subject to passing theoretical and practical tests.",
+  },
+  {
+    slug: "caces-r486-nacelle",
+    title: "CACES® R486 — Aerial Work Platforms (MEWP)",
+    shortDescription:
+      "Training for operating mobile elevating work platforms (MEWP).",
+    theme: "handling",
+    audience: "both",
+    durationHours: 14,
+    objectives: [
+      "Use MEWP safely",
+      "Understand risks associated with working at height",
+      "Master verification and safety procedures",
+    ],
+    prerequisites: [
+      "Minimum 18 years old",
+      "Medical fitness for working at height",
+      "No medical contraindications (vertigo, etc.)",
+    ],
+    modalities: [
+      "In-person training",
+      "2 days (14 hours, indicative)",
+      "Practical exercises on various MEWP types",
+    ],
+    deliverables: [
+      "CACES® R486 Certificate (indicative validity: 5 years)",
+      "Training certificate",
+    ],
+    certificationNote:
+      "CACES® certification is issued subject to passing evaluations, according to current standards.",
+  },
+  {
+    slug: "incendie-epi",
+    title: "Fire Safety — First Response Team Member",
+    shortDescription:
+      "Learn to respond to fires: alert, evacuation, first intervention.",
+    theme: "fire",
+    audience: "B2B",
+    durationHours: 4,
+    objectives: [
+      "Understand basic combustion principles",
+      "Use first response equipment (extinguishers)",
+      "Master alert and evacuation procedures",
+    ],
+    prerequisites: [
+      "No specific prerequisites",
+      "Physical ability to handle an extinguisher",
+    ],
+    modalities: [
+      "In-person training",
+      "Half-day (4 hours)",
+      "Practical exercises on real fires (eco-friendly fire tray)",
+    ],
+    deliverables: ["First Response training certificate", "Training materials"],
+    certificationNote:
+      "Participation certificate issued upon training completion.",
+  },
+  {
+    slug: "gestes-postures",
+    title: "Ergonomics & Posture — MSD Prevention",
+    shortDescription:
+      "Learn proper techniques to protect your health at work and prevent musculoskeletal disorders.",
+    theme: "safety",
+    audience: "both",
+    durationHours: 7,
+    objectives: [
+      "Identify risks related to manual handling",
+      "Apply effort-saving principles",
+      "Adopt proper work postures",
+    ],
+    prerequisites: [
+      "No prerequisites",
+      "Open to all employees exposed to handling risks",
+    ],
+    modalities: [
+      "In-person training",
+      "1 day (7 hours)",
+      "Practical exercises adapted to the workstation",
+    ],
+    deliverables: ["Training certificate", "Best practices memo"],
+    certificationNote:
+      "Participation certificate issued upon training completion.",
+  },
+];
+
+// Export formations based on locale
+export const formations = formationsFR;
+
+export function getFormations(locale: Locale): Formation[] {
+  return locale === "en" ? formationsEN : formationsFR;
 }
 
-export function getFormationsByTheme(theme: Theme): Formation[] {
-  return formations.filter((f) => f.theme === theme);
+export function getFormationBySlug(
+  slug: string,
+  locale: Locale = "fr",
+): Formation | undefined {
+  const data = getFormations(locale);
+  return data.find((f) => f.slug === slug);
 }
 
-export function getFormationsByAudience(audience: Audience): Formation[] {
-  return formations.filter(
-    (f) => f.audience === audience || f.audience === "both",
-  );
+export function getFormationsByTheme(
+  theme: Theme,
+  locale: Locale = "fr",
+): Formation[] {
+  const data = getFormations(locale);
+  return data.filter((f) => f.theme === theme);
+}
+
+export function getFormationsByAudience(
+  audience: Audience,
+  locale: Locale = "fr",
+): Formation[] {
+  const data = getFormations(locale);
+  return data.filter((f) => f.audience === audience || f.audience === "both");
 }

@@ -1,5 +1,5 @@
-import type { Formation } from "@/lib/data/formations";
-import { type Locale } from "@/lib/i18n";
+import type { Formation, Theme } from "@/lib/data/formations";
+import { type Locale, getDictionary } from "@/lib/i18n";
 import Link from "next/link";
 
 interface FormationCardProps {
@@ -8,7 +8,7 @@ interface FormationCardProps {
   variant?: "default" | "compact";
 }
 
-const themeColors: Record<string, string> = {
+const themeColors: Record<Theme, string> = {
   safety: "badge-accent",
   logistics: "badge-turquoise",
   electrical: "badge-violet",
@@ -22,6 +22,7 @@ export default function FormationCard({
   variant = "default",
 }: FormationCardProps) {
   const isCompact = variant === "compact";
+  const dict = getDictionary(locale);
 
   return (
     <Link
@@ -31,8 +32,8 @@ export default function FormationCard({
       <div className="flex flex-col h-full">
         {/* Theme badge */}
         <div className="flex items-center gap-2 mb-3">
-          <span className={`badge ${themeColors[formation.theme] || "badge"}`}>
-            {formation.theme.charAt(0).toUpperCase() + formation.theme.slice(1)}
+          <span className={`badge ${themeColors[formation.theme]}`}>
+            {dict.themes[formation.theme]}
           </span>
           <span className="badge">{formation.durationHours}h</span>
         </div>
@@ -55,12 +56,13 @@ export default function FormationCard({
 
         {/* CTA hint */}
         <div className="flex items-center gap-1 text-accent text-sm font-medium">
-          <span>{locale === "fr" ? "En savoir plus" : "Learn more"}</span>
+          <span>{dict.common.learnMore}</span>
           <svg
             className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
