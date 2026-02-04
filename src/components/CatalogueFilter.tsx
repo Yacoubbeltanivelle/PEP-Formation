@@ -29,7 +29,7 @@ export default function CatalogueFilter({
   useEffect(() => {
     const hash = window.location.hash.replace("#", "") as Theme;
     if (THEMES.includes(hash)) {
-      setActiveTheme(hash);
+      setActiveTheme(hash); // eslint-disable-line react-hooks/exhaustive-deps
     }
   }, []);
 
