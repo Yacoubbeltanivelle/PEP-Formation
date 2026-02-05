@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { type Locale, getDictionary } from "@/lib/i18n";
 import { type Formation, type Theme } from "@/lib/data/formations";
 import FormationCard from "@/components/FormationCard";
@@ -18,35 +18,41 @@ const THEMES: Theme[] = [
   "handling",
 ];
 
+// Helper to get initial theme from hash (client-side only)
+function getInitialTheme(): Theme | null {
+  if (typeof window === "undefined") return null;
+  const hash = window.location.hash.replace("#", "") as Theme;
+  return THEMES.includes(hash) ? hash : null;
+}
+
 export default function CatalogueFilter({
   locale,
   formations,
 }: CatalogueFilterProps) {
-  const [activeTheme, setActiveTheme] = useState<Theme | null>(null);
+  // Initialize state lazily from URL hash
+  const [activeTheme, setActiveTheme] = useState<Theme | null>(() =>
+    getInitialTheme(),
+  );
   const dict = getDictionary(locale);
 
-  // Deep-link: Read hash on mount
-  useEffect(() => {
-    const hash = window.location.hash.replace("#", "") as Theme;
-    if (THEMES.includes(hash)) {
-      etActisveTheme(hash); // eslint-disable-line react-hooks/exhaustive-dep      setActiveTheme(hash); // eslint-disable-line
-    }
-  }, []);
-
   // Update hash when filter changes
-  const handleFilterChange = (theme: Theme | null) => {
+  const handleFilterChange = useCallback((theme: Theme | null) => {
     setActiveTheme(theme);
     if (theme) {
       window.history.replaceState(null, "", `#${theme}`);
     } else {
       window.history.replaceState(null, "", window.location.pathname);
     }
-  };
+  }, []);
 
   // Filter formations
-  const filteredFormations = activeTheme
-    ? formations.filter((f) => f.theme === activeTheme)
-    : formations;
+  const filteredFormations = useMemo(
+    () =>
+      activeTheme
+        ? formations.filter((f) => f.theme === activeTheme)
+        : formations,
+    [activeTheme, formations],
+  );
 
   return (
     <>
