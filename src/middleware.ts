@@ -22,6 +22,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/brand") || // Allow brand assets
     pathname.includes(".") // Static files
   ) {
     return NextResponse.next();
@@ -36,12 +37,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Redirect to default locale
+  // Redirect to default locale (handles "/" and any other path without locale)
   const locale = getLocale(request);
-  const newUrl = new URL(
-    `/${locale}${pathname === "/" ? "" : pathname}`,
-    request.url,
-  );
+  const newPath = pathname === "/" ? "" : pathname;
+  const newUrl = new URL(`/${locale}${newPath}`, request.url);
 
   return NextResponse.redirect(newUrl);
 }
@@ -49,6 +48,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths except static files and API routes
-    "/((?!_next/static|_next/image|favicon.ico|.*\\..*|api).*)",
+    "/((?!_next/static|_next/image|favicon.ico|brand|.*\\..*).*)",
   ],
 };

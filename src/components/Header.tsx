@@ -31,27 +31,27 @@ export default function Header({ locale, dict }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-graphite/5">
       <nav className="container-main flex items-center justify-between h-16">
-        {/* Logo - Full on desktop, Mark on mobile */}
+        {/* Logo - Full on desktop, Small on mobile */}
         <Link
           href={`/${locale}`}
           className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pep-mint focus-visible:ring-offset-2 rounded"
           aria-label="PEP Formations - Accueil"
         >
-          {/* Mobile: Logo mark only */}
+          {/* Mobile: Logo petit */}
           <Image
-            src="/brand/logo-mark.svg"
+            src="/brand/logo-petit.svg"
             alt="PEP Formations"
-            width={36}
-            height={36}
+            width={40}
+            height={40}
             priority
             className="md:hidden"
           />
-          {/* Desktop: Full logo */}
+          {/* Desktop: Logo horizontal complet */}
           <Image
-            src="/brand/logo-full.svg"
+            src="/brand/logo-Long-Entier.svg"
             alt="PEP Formations"
-            width={140}
-            height={42}
+            width={160}
+            height={48}
             priority
             className="hidden md:block"
           />

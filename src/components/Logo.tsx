@@ -15,12 +15,13 @@ export default function Logo({
   theme = "dark",
   className = "",
 }: LogoProps) {
+  // Map variants to actual logo files
   const logoSrc =
     variant === "mark"
-      ? "/brand/logo-mark.svg"
+      ? "/brand/logo-petit.svg"
       : theme === "light"
-        ? "/brand/logo-white.svg"
-        : "/brand/logo-full.svg";
+        ? "/brand/logo-Blanc.svg"
+        : "/brand/logo-Long-Entier.svg";
 
   const sizes =
     variant === "mark" ? { width: 40, height: 40 } : { width: 160, height: 48 };

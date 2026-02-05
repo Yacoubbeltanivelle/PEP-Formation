@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: "PEP Formations",
   description:
     "Centre de formation professionnelle - Logistique, Sécurité, Manutention",
+  icons: {
+    icon: "/brand/logo-petit.svg",
+    shortcut: "/brand/logo-petit.svg",
+    apple: "/brand/logo-petit.svg",
+  },
   openGraph: {
     title: "PEP Formations",
     description:

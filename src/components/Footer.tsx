@@ -12,7 +12,7 @@ export default function Footer({ dict, locale }: FooterProps) {
     <footer className="bg-graphite text-white">
       <div className="container-main py-16">
         <div className="grid md:grid-cols-4 gap-10">
-          {/* Brand with logo */}
+          {/* Brand with logo blanc */}
           <div>
             <Link
               href={`/${locale}`}
@@ -20,10 +20,10 @@ export default function Footer({ dict, locale }: FooterProps) {
               aria-label="PEP Formations - Accueil"
             >
               <Image
-                src="/brand/logo-white.svg"
+                src="/brand/logo-Blanc.svg"
                 alt="PEP Formations"
-                width={120}
-                height={36}
+                width={140}
+                height={42}
                 className="opacity-90 hover:opacity-100 transition-opacity"
               />
             </Link>
