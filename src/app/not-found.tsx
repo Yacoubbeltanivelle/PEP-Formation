@@ -30,7 +30,8 @@ export default function NotFound() {
             Page introuvable
           </h1>
           <p className="text-graphite/60 text-lg mb-8 leading-relaxed">
-            Oups ! La page que vous cherchez n'existe pas ou a été déplacée.
+            Oups ! La page que vous cherchez n&apos;existe pas ou a été
+            déplacée.
           </p>
 
           {/* Divider signature */}
@@ -56,7 +57,7 @@ export default function NotFound() {
                 <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
-              Retour à l'accueil
+              Retour à l&apos;accueil
             </Link>
             <Link
               href="/fr/catalogue"
@@ -66,9 +67,9 @@ export default function NotFound() {
             </Link>
           </div>
 
-          {/* Contact d'aide */}
+          {/* Contact d aide */}
           <p className="mt-12 text-sm text-graphite/50">
-            Besoin d'aide ?{" "}
+            Besoin d&apos;aide ?{" "}
             <Link
               href="/fr/contact"
               className="text-pep-orange hover:underline"
