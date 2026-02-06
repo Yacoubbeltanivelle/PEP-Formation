@@ -9,6 +9,9 @@ interface LogoProps {
   className?: string;
 }
 
+// Préfixe pour les assets statiques (GitHub Pages)
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+
 export default function Logo({
   locale,
   variant = "full",
@@ -18,10 +21,10 @@ export default function Logo({
   // Map variants to actual logo files
   const logoSrc =
     variant === "mark"
-      ? "/brand/logo-petit.svg"
+      ? `${basePath}/brand/logo-petit.svg`
       : theme === "light"
-        ? "/brand/logo-Blanc.svg"
-        : "/brand/logo-Long-Entier.svg";
+        ? `${basePath}/brand/logo-Blanc.svg`
+        : `${basePath}/brand/logo-Long-Entier.svg`;
 
   const sizes =
     variant === "mark" ? { width: 40, height: 40 } : { width: 160, height: 48 };

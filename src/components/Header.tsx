@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { type Locale, type Dictionary, locales } from "@/lib/i18n";
 
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+
 interface HeaderProps {
   locale: Locale;
   dict: Dictionary;
@@ -39,7 +41,7 @@ export default function Header({ locale, dict }: HeaderProps) {
         >
           {/* Mobile: Logo petit */}
           <Image
-            src="/brand/logo-petit.svg"
+            src={`${basePath}/brand/logo-petit.svg`}
             alt="PEP Formations"
             width={40}
             height={40}
@@ -48,7 +50,7 @@ export default function Header({ locale, dict }: HeaderProps) {
           />
           {/* Desktop: Logo horizontal complet */}
           <Image
-            src="/brand/logo-Long-Entier.svg"
+            src={`${basePath}/brand/logo-Long-Entier.svg`}
             alt="PEP Formations"
             width={160}
             height={48}

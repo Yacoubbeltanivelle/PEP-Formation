@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { type Dictionary, type Locale } from "@/lib/i18n";
 
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+
 interface FooterProps {
   dict: Dictionary;
   locale: Locale;
@@ -20,7 +22,7 @@ export default function Footer({ dict, locale }: FooterProps) {
               aria-label="PEP Formations - Accueil"
             >
               <Image
-                src="/brand/logo-Blanc.svg"
+                src={`${basePath}/brand/logo-Blanc.svg`}
                 alt="PEP Formations"
                 width={140}
                 height={42}

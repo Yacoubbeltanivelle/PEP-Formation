@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+
 // Premium fonts
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-heading",
@@ -22,9 +24,9 @@ export const metadata: Metadata = {
   description:
     "Centre de formation professionnelle - Logistique, Sécurité, Manutention",
   icons: {
-    icon: "/brand/logo-petit.svg",
-    shortcut: "/brand/logo-petit.svg",
-    apple: "/brand/logo-petit.svg",
+    icon: `${basePath}/brand/logo-petit.svg`,
+    shortcut: `${basePath}/brand/logo-petit.svg`,
+    apple: `${basePath}/brand/logo-petit.svg`,
   },
   openGraph: {
     title: "PEP Formations",
