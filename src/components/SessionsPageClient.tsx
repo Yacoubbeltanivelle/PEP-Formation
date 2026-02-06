@@ -9,6 +9,10 @@ import Container from "@/components/Container";
 import SectionTitle from "@/components/SectionTitle";
 import MonthCalendar from "@/components/MonthCalendar";
 import Link from "next/link";
+import Image from "next/image";
+
+// Préfixe pour les assets statiques (GitHub Pages)
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
 
 interface SessionsPageClientProps {
   locale: Locale;
@@ -32,10 +36,26 @@ export default function SessionsPageClient({
   return (
     <section className="section">
       <Container>
-        <SectionTitle
-          title={dict.sessions.title}
-          subtitle={dict.sessions.subtitle}
-        />
+        {/* Hero banner with calendar image */}
+        <div className="relative rounded-2xl overflow-hidden mb-12 h-48 md:h-64">
+          <Image
+            src={`${basePath}/images/session-calendar.png`}
+            alt="Calendrier des sessions"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-graphite/80 to-graphite/40 flex items-center">
+            <div className="p-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                {dict.sessions.title}
+              </h1>
+              <p className="text-white/80 text-lg max-w-xl">
+                {dict.sessions.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Calendar */}

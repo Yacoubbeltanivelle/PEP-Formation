@@ -1,6 +1,10 @@
 import type { Formation, Theme } from "@/lib/data/formations";
 import { type Locale, getDictionary } from "@/lib/i18n";
 import Link from "next/link";
+import Image from "next/image";
+
+// Préfixe pour les assets statiques (GitHub Pages)
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
 
 interface FormationCardProps {
   formation: Formation;
@@ -8,12 +12,35 @@ interface FormationCardProps {
   variant?: "default" | "compact";
 }
 
-const themeColors: Record<Theme, { badge: string; accent: string }> = {
-  safety: { badge: "badge-accent", accent: "border-t-pep-orange" },
-  logistics: { badge: "badge-turquoise", accent: "border-t-pep-mint" },
-  electrical: { badge: "badge-violet", accent: "border-t-pep-violet" },
-  fire: { badge: "badge-accent", accent: "border-t-pep-orange" },
-  handling: { badge: "badge-turquoise", accent: "border-t-pep-mint" },
+const themeColors: Record<
+  Theme,
+  { badge: string; accent: string; image: string }
+> = {
+  safety: {
+    badge: "badge-accent",
+    accent: "border-t-pep-orange",
+    image: `${basePath}/images/category-security.png`,
+  },
+  logistics: {
+    badge: "badge-turquoise",
+    accent: "border-t-pep-mint",
+    image: `${basePath}/images/category-handling.png`,
+  },
+  electrical: {
+    badge: "badge-violet",
+    accent: "border-t-pep-violet",
+    image: `${basePath}/images/category-electricity.png`,
+  },
+  fire: {
+    badge: "badge-accent",
+    accent: "border-t-pep-orange",
+    image: `${basePath}/images/category-security.png`,
+  },
+  handling: {
+    badge: "badge-turquoise",
+    accent: "border-t-pep-mint",
+    image: `${basePath}/images/category-handling.png`,
+  },
 };
 
 export default function FormationCard({
@@ -28,8 +55,21 @@ export default function FormationCard({
   return (
     <Link
       href={`/${locale}/formations/${formation.slug}`}
-      className={`card group block border-t-2 ${colors.accent} hover:shadow-lg hover:border-graphite/10 transition-all duration-150`}
+      className={`card group block border-t-2 ${colors.accent} hover:shadow-lg hover:border-graphite/10 transition-all duration-150 overflow-hidden`}
     >
+      {/* Category Image */}
+      {!isCompact && (
+        <div className="relative h-32 -mx-6 -mt-6 mb-4 overflow-hidden">
+          <Image
+            src={colors.image}
+            alt={dict.themes[formation.theme]}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent" />
+        </div>
+      )}
       <div className="flex flex-col h-full">
         {/* Theme badge */}
         <div className="flex items-center gap-2 mb-3">
