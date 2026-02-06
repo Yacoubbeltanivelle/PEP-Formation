@@ -1,4 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
+
+// Préfixe pour les assets statiques (GitHub Pages)
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
 
 export default function NotFound() {
   return (
@@ -18,11 +22,14 @@ export default function NotFound() {
         <div className="text-center max-w-lg">
           {/* Illustration 404 */}
           <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-pep-orange/10 via-pep-mint/10 to-pep-violet/10 mb-6">
-              <span className="text-6xl font-bold font-heading bg-gradient-to-r from-pep-orange via-pep-mint to-pep-violet bg-clip-text text-transparent">
-                404
-              </span>
-            </div>
+            <Image
+              src={`${basePath}/images/error-404.png`}
+              alt="Page introuvable - Illustration"
+              width={280}
+              height={280}
+              className="mx-auto"
+              priority
+            />
           </div>
 
           {/* Message */}

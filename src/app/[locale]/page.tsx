@@ -2,10 +2,14 @@ import { type Locale, getDictionary, locales } from "@/lib/i18n";
 import { formations } from "@/lib/data/formations";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Container from "@/components/Container";
 import SectionTitle from "@/components/SectionTitle";
 import ImpulseDivider from "@/components/ImpulseDivider";
 import FormationCard from "@/components/FormationCard";
+
+// Préfixe pour les assets statiques (GitHub Pages)
+const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -29,20 +33,32 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Hero Section */}
       <section className="section bg-offwhite">
         <Container>
-          <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-graphite mb-6 leading-tight tracking-tight">
-              {dict.home.heroTitle}
-            </h1>
-            <p className="text-xl md:text-2xl text-graphite-lighter mb-8 max-w-2xl leading-relaxed">
-              {dict.home.heroSubtitle}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href={`/${locale}/contact`} className="btn-primary">
-                {dict.home.ctaQuote}
-              </Link>
-              <Link href={`/${locale}/sessions`} className="btn-secondary">
-                {dict.home.ctaSessions}
-              </Link>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-xl">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-graphite mb-6 leading-tight tracking-tight">
+                {dict.home.heroTitle}
+              </h1>
+              <p className="text-xl md:text-2xl text-graphite-lighter mb-8 leading-relaxed">
+                {dict.home.heroSubtitle}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href={`/${locale}/contact`} className="btn-primary">
+                  {dict.home.ctaQuote}
+                </Link>
+                <Link href={`/${locale}/sessions`} className="btn-secondary">
+                  {dict.home.ctaSessions}
+                </Link>
+              </div>
+            </div>
+            <div className="hidden lg:block">
+              <Image
+                src={`${basePath}/images/hero-training.png`}
+                alt="Formation professionnelle PEP"
+                width={600}
+                height={400}
+                className="rounded-2xl shadow-2xl"
+                priority
+              />
             </div>
           </div>
         </Container>
