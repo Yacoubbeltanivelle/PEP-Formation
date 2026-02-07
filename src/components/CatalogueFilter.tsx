@@ -17,20 +17,28 @@ const THEMES: Theme[] = [
   "fire",
   "handling",
 ];
+// Get initial theme from hash (safe for SSR)
+function getInitialTheme(): Theme | null {
+  if (typeof window === "undefined") return null;
+  const hash = window.location.hash.replace("#", "") as Theme;
+  return THEMES.includes(hash) ? hash : null;
+}
 
 export default function CatalogueFilter({
   locale,
   formations,
 }: CatalogueFilterProps) {
-  const [activeTheme, setActiveTheme] = useState<Theme | null>(null);
+  const [activeTheme, setActiveTheme] = useState<Theme | null>(getInitialTheme);
   const dict = getDictionary(locale);
 
-  // Read hash on mount (client-side only) - fixes deep-link issue
+  // Listen for hash changes (browser back/forward)
   useEffect(() => {
-    const hash = window.location.hash.replace("#", "") as Theme;
-    if (THEMES.includes(hash)) {
-      setActiveTheme(hash);
-    }
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "") as Theme;
+      setActiveTheme(THEMES.includes(hash) ? hash : null);
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   // Update hash when filter changes

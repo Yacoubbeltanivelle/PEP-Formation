@@ -6,7 +6,6 @@ import { getSessionsByDate, getSessionDates } from "@/lib/data/sessions";
 import { getFormationBySlug } from "@/lib/data/formations";
 import { formatDate } from "@/lib/utils";
 import Container from "@/components/Container";
-import SectionTitle from "@/components/SectionTitle";
 import MonthCalendar from "@/components/MonthCalendar";
 import Link from "next/link";
 import Image from "next/image";
