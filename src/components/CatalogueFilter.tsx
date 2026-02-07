@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { type Locale, getDictionary } from "@/lib/i18n";
 import { type Formation, type Theme } from "@/lib/data/formations";
 import FormationCard from "@/components/FormationCard";
@@ -18,22 +18,20 @@ const THEMES: Theme[] = [
   "handling",
 ];
 
-// Helper to get initial theme from hash (client-side only)
-function getInitialTheme(): Theme | null {
-  if (typeof window === "undefined") return null;
-  const hash = window.location.hash.replace("#", "") as Theme;
-  return THEMES.includes(hash) ? hash : null;
-}
-
 export default function CatalogueFilter({
   locale,
   formations,
 }: CatalogueFilterProps) {
-  // Initialize state lazily from URL hash
-  const [activeTheme, setActiveTheme] = useState<Theme | null>(() =>
-    getInitialTheme(),
-  );
+  const [activeTheme, setActiveTheme] = useState<Theme | null>(null);
   const dict = getDictionary(locale);
+
+  // Read hash on mount (client-side only) - fixes deep-link issue
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "") as Theme;
+    if (THEMES.includes(hash)) {
+      setActiveTheme(hash);
+    }
+  }, []);
 
   // Update hash when filter changes
   const handleFilterChange = useCallback((theme: Theme | null) => {

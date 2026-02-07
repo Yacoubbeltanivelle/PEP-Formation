@@ -44,8 +44,11 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
           {/* Contact Info */}
           <div className="mt-12 grid sm:grid-cols-2 gap-6">
-            <div className="card text-center">
-              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3">
+            <a
+              href="tel:+33123456789"
+              className="card text-center hover:shadow-lg hover:border-accent/20 transition-all group"
+            >
+              <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-accent/20 transition-colors">
                 <svg
                   className="w-6 h-6 text-accent"
                   fill="none"
@@ -60,10 +63,18 @@ export default async function ContactPage({ params }: ContactPageProps) {
                   />
                 </svg>
               </div>
-              <p className="font-medium text-ink">{dict.footer.phone}</p>
-            </div>
-            <div className="card text-center">
-              <div className="w-12 h-12 bg-turquoise/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <p className="font-medium text-ink group-hover:text-accent transition-colors">
+                {dict.footer.phone}
+              </p>
+              <p className="text-xs text-ink-lighter mt-1">
+                {locale === "fr" ? "Lun-Ven · 9h-18h" : "Mon-Fri · 9am-6pm"}
+              </p>
+            </a>
+            <a
+              href={`mailto:${dict.footer.email}`}
+              className="card text-center hover:shadow-lg hover:border-turquoise/20 transition-all group"
+            >
+              <div className="w-12 h-12 bg-turquoise/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-turquoise/20 transition-colors">
                 <svg
                   className="w-6 h-6 text-turquoise"
                   fill="none"
@@ -78,8 +89,15 @@ export default async function ContactPage({ params }: ContactPageProps) {
                   />
                 </svg>
               </div>
-              <p className="font-medium text-ink">{dict.footer.email}</p>
-            </div>
+              <p className="font-medium text-ink group-hover:text-turquoise transition-colors">
+                {dict.footer.email}
+              </p>
+              <p className="text-xs text-ink-lighter mt-1">
+                {locale === "fr"
+                  ? "Réponse sous 24–48h ouvrées"
+                  : "Response within 24-48 business hours"}
+              </p>
+            </a>
           </div>
 
           {/* Address */}
