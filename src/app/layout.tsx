@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
-const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+const basePath =
+  process.env.NODE_ENV === "production" ? "/Pep-formations-prototype-v1" : "";
 
 // Premium fonts
 const spaceGrotesk = Space_Grotesk({
