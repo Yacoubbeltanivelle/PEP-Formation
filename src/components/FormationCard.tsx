@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Préfixe pour les assets statiques (GitHub Pages)
-const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+const basePath =
+  process.env.NODE_ENV === "production" ? "/Pep-formations-prototype-v1" : "";
 
 interface FormationCardProps {
   formation: Formation;

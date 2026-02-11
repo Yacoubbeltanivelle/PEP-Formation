@@ -10,7 +10,8 @@ interface LogoProps {
 }
 
 // Préfixe pour les assets statiques (GitHub Pages)
-const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+const basePath =
+  process.env.NODE_ENV === "production" ? "/Pep-formations-prototype-v1" : "";
 
 export default function Logo({
   locale,

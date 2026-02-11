@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Préfixe pour les assets statiques (GitHub Pages)
-const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+const basePath =
+  process.env.NODE_ENV === "production" ? "/Pep-formations-prototype-v1" : "";
 
 export default function NotFound() {
   return (
@@ -23,7 +24,7 @@ export default function NotFound() {
           {/* Illustration 404 */}
           <div className="mb-8">
             <Image
-              src={`${basePath}/images/error-404.png`}
+              src="/Pep-formations-prototype-v1/images/error-404.png"
               alt="Page introuvable - Illustration"
               width={280}
               height={280}

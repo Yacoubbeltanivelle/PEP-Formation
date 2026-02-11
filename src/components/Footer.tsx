@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { type Dictionary, type Locale } from "@/lib/i18n";
 
-const basePath = process.env.NODE_ENV === "production" ? "/PEP-Formation" : "";
+const basePath =
+  process.env.NODE_ENV === "production" ? "/Pep-formations-prototype-v1" : "";
 
 interface FooterProps {
   dict: Dictionary;

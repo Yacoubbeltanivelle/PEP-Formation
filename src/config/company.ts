@@ -25,7 +25,8 @@ export const COMPANY = {
   },
 
   // URL de base pour canonical / OG
-  publicBaseUrl: "https://yacoubbeltanivelle.github.io/PEP-Formation",
+  publicBaseUrl:
+    "https://yacoubbeltanivelle.github.io/Pep-formations-prototype-v1",
 } as const;
 
 export type Company = typeof COMPANY;
